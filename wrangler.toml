@@ -1,0 +1,80 @@
+# Public template. Replace every <PLACEHOLDER> with your own Cloudflare resource IDs
+# (wrangler kv namespace create / wrangler d1 create). Rate-limit namespace IDs must be
+# unique integers within your account. Secrets go in `wrangler secret put`, never here.
+
+name = "domainage-staging"
+main = "src/index.js"
+compatibility_date = "2024-09-23"
+workers_dev = true
+preview_urls = false
+
+[limits]
+cpu_ms = 100
+
+[observability]
+enabled = false
+
+[vars]
+PUBLIC_LAUNCH = "false"
+DEPLOY_ENV = "staging"
+ANON_LOOKUPS_PER_MIN = "10"
+MCP_REGISTRY_AUTH = ""
+
+[[ratelimits]]
+name = "LOOKUP_LIMITER"
+namespace_id = "<RATE_LIMIT_NAMESPACE_ID_1>"
+  [ratelimits.simple]
+  limit = 10
+  period = 60
+
+[[ratelimits]]
+name = "RAPIDAPI_BASIC_LIMITER"
+namespace_id = "<RATE_LIMIT_NAMESPACE_ID_2>"
+  [ratelimits.simple]
+  limit = 10
+  period = 60
+
+[[ratelimits]]
+name = "RAPIDAPI_PRO_LIMITER"
+namespace_id = "<RATE_LIMIT_NAMESPACE_ID_3>"
+  [ratelimits.simple]
+  limit = 120
+  period = 60
+
+[env.production]
+name = "domainage"
+workers_dev = true
+preview_urls = false
+
+[env.production.limits]
+cpu_ms = 100
+
+[env.production.observability]
+enabled = false
+
+[env.production.vars]
+PUBLIC_LAUNCH = "true"
+DEPLOY_ENV = "production"
+ANON_LOOKUPS_PER_MIN = "10"
+MCP_REGISTRY_AUTH = ""
+
+[[env.production.ratelimits]]
+name = "LOOKUP_LIMITER"
+namespace_id = "<RATE_LIMIT_NAMESPACE_ID_4>"
+  [env.production.ratelimits.simple]
+  limit = 10
+  period = 60
+
+[[env.production.ratelimits]]
+name = "RAPIDAPI_BASIC_LIMITER"
+namespace_id = "<RATE_LIMIT_NAMESPACE_ID_5>"
+  [env.production.ratelimits.simple]
+  limit = 10
+  period = 60
+
+[[env.production.ratelimits]]
+name = "RAPIDAPI_PRO_LIMITER"
+namespace_id = "<RATE_LIMIT_NAMESPACE_ID_6>"
+  [env.production.ratelimits.simple]
+  limit = 120
+  period = 60
