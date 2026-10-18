@@ -12,13 +12,26 @@ Domain age and RDAP lookup: registration date, age, expiry, registrar, status an
 
 DomainAge is a remote MCP server (Streamable HTTP) at `https://domainage.mike-tusa.workers.dev/mcp`. Tools: `lookup_domain`.
 
-Cursor, Cline and Windsurf accept this config:
+Cursor and Windsurf accept this config:
 
 ```json
 {
   "mcpServers": {
     "domainage": {
       "type": "http",
+      "url": "https://domainage.mike-tusa.workers.dev/mcp"
+    }
+  }
+}
+```
+
+Cline (MCP Servers > Remote Servers, or `cline_mcp_settings.json`) needs `"type": "streamableHttp"`:
+
+```json
+{
+  "mcpServers": {
+    "domainage": {
+      "type": "streamableHttp",
       "url": "https://domainage.mike-tusa.workers.dev/mcp"
     }
   }
