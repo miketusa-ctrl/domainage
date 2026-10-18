@@ -42,6 +42,8 @@ npx wrangler@4 dev      # local dev server
 
 `wrangler.toml` is a template: create your own KV namespaces / D1 databases / rate-limit namespaces and replace the `<PLACEHOLDER>` values before `npx wrangler@4 deploy`. Any secrets the Worker reads go in `wrangler secret put` (or `.dev.vars` locally), never in the repo.
 
+Optional Worker secrets (leave unset if you do not need them): `GLAMA_CLAIM` (your glama.ai connector claim token, served at `/.well-known/glama.json`); `RAPIDAPI_PROXY_SECRET` (only needed if you sell the API through RapidAPI; it must match the X-RapidAPI-Proxy-Secret header RapidAPI adds).
+
 ## Third-party data
 
 `src/psl.js` is generated from the [Public Suffix List](https://publicsuffix.org/) (MPL-2.0); `src/bootstrap.js` from the IANA RDAP bootstrap file (dns.json).
