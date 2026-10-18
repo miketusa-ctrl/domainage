@@ -62,6 +62,6 @@ export function openApiSpec(origin, L) {
   };
 }
 export const serverCard = (origin) => ({ serverInfo: { name: SERVER_INFO.name, title: SERVER_INFO.title, version: VERSION }, transport: { type: 'streamable-http', url: `${origin}/mcp` }, authentication: { required: false }, tools: TOOLS, resources: [], prompts: [] });
-// Glama connector ownership claim, served at /.well-known/glama.json. Replace the placeholder with your own claim token from glama.ai.
+// Glama connector ownership claim, served at /.well-known/glama.json. Set your own glama.ai claim token as the GLAMA_CLAIM Worker secret (or replace the placeholder, if present).
 export const GLAMA_CLAIM_RE = /^glama_claim_[A-Za-z0-9_-]{8,128}$/;
 export const glamaJson = (env = {}) => { const c = typeof env.GLAMA_CLAIM === 'string' ? env.GLAMA_CLAIM.trim() : ''; return GLAMA_CLAIM_RE.test(c) ? JSON.stringify({ $schema: 'https://glama.ai/mcp/schemas/connector.json', claim: c }) : null; };
